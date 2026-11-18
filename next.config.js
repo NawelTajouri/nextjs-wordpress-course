@@ -6,7 +6,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'wubik.dev',
-        pathname: '/s02/hotdang-course.com/',
+        pathname: '/s02/hotdang-course.com/**',
       },
     ],
   },
