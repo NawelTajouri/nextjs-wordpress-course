@@ -5,8 +5,8 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'test.dev',
-        pathname: '/folder/project-name.com/**',
+        hostname: 'wubik.dev',
+        pathname: '/s02/hotdang-course.com/',
       },
     ],
   },
