@@ -8,60 +8,75 @@ export const getPageStaticProps = async (context) => {
 
       const {data} = await client.query({
     query: gql`
-    query PageQuery($uri: String!) {
-  nodeByUri(uri: $uri) {
-    ... on Page {
-      id
-      title
-      blocks
-      seo {
-        title
-        metaDesc
-      }
-    }
-      ... on Property {
-      id
-      title
-      blocks
-      seo {
-        title
-        metaDesc
-      }
-    }
-      
-  }
-    
-      acfOptionsMainMenu {
-    mainMenu {
-          callToActionButton {
-        destination {
+      query PageQuery($uri: String!) {
+        nodeByUri(uri: $uri) {
           ... on Page {
-            uri
-          }
-        }
-        label
-      }
-      menuItems {
-        menuItem {
-          destination {
-            ... on Page {
-              uri
+            id
+            title
+            blocks(postTemplate: false)
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+            seo {
+              title
+              metaDesc
             }
           }
-          label
-        }
-        items {
-          destination {
-            ... on Page {
-              uri
+          ... on Property {
+            id
+            title
+            blocks(postTemplate: false)
+            seo {
+              title
+              metaDesc
+            }
+            propertyFeatures {
+              bathrooms
+              bedrooms
+              hasParking
+              petFriendly
+              price
+            }
+            featuredImage {
+              node {
+                sourceUrl
+              }
             }
           }
-          label
+        }
+        acfOptionsMainMenu {
+          mainMenu {
+            callToActionButton {
+              label
+              destination {
+                ... on Page {
+                  uri
+                }
+              }
+            }
+            menuItems {
+              menuItem {
+                destination {
+                  ... on Page {
+                    uri
+                  }
+                }
+                label
+              }
+              items {
+                destination {
+                  ... on Page {
+                    uri
+                  }
+                }
+                label
+              }
+            }
+          }
         }
       }
-    }
-  }
-}
     `,
     variables: {
       uri,
